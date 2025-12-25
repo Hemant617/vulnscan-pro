@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Scan - VulnScan Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <span class="fs-3">🛡️ VulnScan Pro</span>
+            </a>
+            <a href="/" class="btn btn-outline-light">Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Start New Security Scan</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="scanForm">
+                            <div class="mb-3">
+                                <label for="target" class="form-label">Target URL or IP Address</label>
+                                <input type="text" class="form-control" id="target" placeholder="https://example.com or 192.168.1.1" required>
+                                <div class="form-text">Enter the target you want to scan. Ensure you have authorization.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="scanType" class="form-label">Scan Type</label>
+                                <select class="form-select" id="scanType">
+                                    <option value="quick">Quick Scan (5-10 minutes)</option>
+                                    <option value="standard" selected>Standard Scan (15-20 minutes)</option>
+                                    <option value="deep">Deep Scan (30+ minutes)</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Scan Options</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="portScan" checked>
+                                    <label class="form-check-label" for="portScan">
+                                        Port Scanning
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="serviceScan" checked>
+                                    <label class="form-check-label" for="serviceScan">
+                                        Service Detection
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="webScan">
+                                    <label class="form-check-label" for="webScan">
+                                        Web Vulnerability Scan (OWASP ZAP)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-warning" role="alert">
+                                <strong>⚠️ Important:</strong> Only scan systems you own or have explicit permission to test. Unauthorized scanning may be illegal.
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Start Scan</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Progress Section (Hidden initially) -->
+                <div id="progressSection" class="card mt-4" style="display: none;">
+                    <div class="card-header">
+                        <h4>Scan in Progress</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="progress mb-3" style="height: 30px;">
+                            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">0%</div>
+                        </div>
+                        <p id="currentTask" class="text-center">Initializing scan...</p>
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
